@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">RentAHelp</string>
+    <string name="login_text">Login</string>
+    <string name="register_text">Register</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="account_exists_text">Already have an account?</string>
+    <string name="account_not_exists_text">Don\'t have an account?</string>
+    <string name="login_now_text">Login Now</string>
+    <string name="register_now_text">Register Now</string>
+</resources>

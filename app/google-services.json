@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "295034154702",
+    "project_id": "rent-a-help-490c8",
+    "storage_bucket": "rent-a-help-490c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295034154702:android:91ac4468ce5d682369ea9f",
+        "android_client_info": {
+          "package_name": "com.example.rentahelp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlsVOyMNOw5rA1bJGQCdChZVoNX4eCI2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
