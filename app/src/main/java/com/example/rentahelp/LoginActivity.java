@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ServicePostingActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
