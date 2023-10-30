@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/findItem"
+        android:title="Find"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+    <item
+        android:id="@+id/postItem"
+        android:title="Post"
+        android:orderInCategory="2"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/aboutItem"
+        android:title="About"
+        android:orderInCategory="3"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/notificationsItem"
+        android:title="Notifications"
+        android:orderInCategory="4"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/logoutItem"
+        android:title="Logout"
+        android:orderInCategory="5"
+        app:showAsAction="never" />
+
+</menu>
