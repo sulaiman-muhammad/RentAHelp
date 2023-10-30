@@ -23,8 +23,9 @@
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:paddingTop="16dp"
-            android:text="John Doe"
-            android:textSize="24sp" />
+            android:text="Username"
+            style="@style/Description_Style"
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/email"
@@ -34,8 +35,9 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="24dp"
             android:paddingTop="8dp"
-            android:text="johndoe@example.com"
-            android:textSize="18sp" />
+            android:text="Email id"
+            style="@style/Description_Style"
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/editProfileButton"
@@ -43,9 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="13dp"
-            android:background="#007aff"
-            android:paddingTop="24dp"
+            android:paddingTop="10dp"
             android:paddingBottom="16dp"
+            android:background="@drawable/btn_style"
             android:text="Edit Profile" />
 
         <Button
@@ -108,16 +110,9 @@
             android:background="@drawable/btn_style"
             android:text="Sign out" />
 
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="70dp"
-            android:background="@drawable/btn_style"
-            android:text="Contact us" />
 
     </LinearLayout>
+
+<!--    android:background="@drawable/btn_style"-->
 
 
