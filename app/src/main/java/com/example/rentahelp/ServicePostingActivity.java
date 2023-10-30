@@ -120,7 +120,7 @@ public class ServicePostingActivity extends AppCompatActivity {
                 service.setTitle(title);
                 service.setDescription(description);
                 service.setPrice(price);
-                Toast.makeText(ServicePostingActivity.this, service.getTitle(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ServicePostingActivity.this, service.getTitle(), Toast.LENGTH_SHORT).show();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference servicesRef = database.getReference("Services");
 
@@ -131,11 +131,12 @@ public class ServicePostingActivity extends AppCompatActivity {
                 // Save the service to the Firebase database
 //                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Services");
 //                String serviceId = databaseReference.push().getKey(); // Generate a unique ID for the service
-////                databaseReference.child(serviceId).setValue(service);
+//                databaseReference.child(serviceId).setValue(service);
 //                servicesReference.push().setValue(service);
+
                 // Redirect to the service browsing activity or other actions
                 startActivity(new Intent(ServicePostingActivity.this, ServiceBrowsingActivity.class));
-//                finish();
+                finish();
             }
         });
     }
