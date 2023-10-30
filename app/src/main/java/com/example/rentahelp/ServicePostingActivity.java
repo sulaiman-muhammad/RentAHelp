@@ -91,7 +91,7 @@ public class ServicePostingActivity extends AppCompatActivity {
                     @Override
                     public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
                         // Define a regular expression to match only numeric characters
-                        String regex = "^[0-9]+";
+                        String regex = "[-]?[0-9]+([.][0-9]*)?";
 
                         // Check if the input matches the regular expression
                         if (source.toString().matches(regex)) {
@@ -111,7 +111,7 @@ public class ServicePostingActivity extends AppCompatActivity {
                 // Get user input
                 String title = title_post;
                 String description = description_post.getText().toString();
-//                double price = Double.parseDouble(price_post.getText().toString());
+                double price = Double.parseDouble(price_post.getText().toString());
 
                 // Create a new service object
 //                Service service = new Service(title, description, price);
@@ -119,7 +119,7 @@ public class ServicePostingActivity extends AppCompatActivity {
                 Service service = new Service();
                 service.setTitle(title);
                 service.setDescription(description);
-//                service.setPrice(34);
+                service.setPrice(price);
                 Toast.makeText(ServicePostingActivity.this, service.getTitle(), Toast.LENGTH_SHORT).show();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference servicesRef = database.getReference("Services");
