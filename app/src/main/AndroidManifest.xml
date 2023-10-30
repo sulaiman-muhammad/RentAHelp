@@ -17,14 +17,14 @@
         <activity
             android:name=".ServiceBrowsingActivity"
             android:label="Service Browsing Activity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ServicePostingActivity"
             android:label="Service Posting Activity"
             android:exported="true" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 
 </manifest>
