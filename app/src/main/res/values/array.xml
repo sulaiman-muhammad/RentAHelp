@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="title_options">
+        <item>Jobs</item>
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <item>Option 3</item>
+        <!-- Add more predefined options as needed -->
+    </array>
+</resources>
