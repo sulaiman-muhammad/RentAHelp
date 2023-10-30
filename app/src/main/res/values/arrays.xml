@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="dropdown_options">Baby sitting, Dog Walking, Plumbing</string-array>
+</resources>

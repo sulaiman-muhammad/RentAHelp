@@ -8,4 +8,10 @@
     <string name="account_not_exists_text">Don\'t have an account?</string>
     <string name="login_now_text">Login Now</string>
     <string name="register_now_text">Register Now</string>
+    <string-array name="spinner_options">
+        <item>Option 1</item>
+        <item>Option 2</item>
+        <item>Option 3</item>
+    </string-array>
+
 </resources>
