@@ -31,17 +31,17 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.findItem) {
                 Log.d(TAG, "Find Selected");
-                Intent intent = new Intent(MainActivity.this, ServiceBrowsingActivity.class);
+                Intent intent = new Intent(this, FindServiceActivity.class);
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.postItem) {
                 Log.d(TAG, "Post Selected");
-                Intent intent = new Intent(MainActivity.this, ServicePostingActivity.class);
+                Intent intent = new Intent(this, ServicePostingActivity.class);
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.aboutItem) {
                 Log.d(TAG, "About Selected");
-                Toast.makeText(MainActivity.this, "Version 1.0, by Sulaiman, Rishabh, Anusha, Nandhini and Gowtham.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Version 1.0, by Sulaiman, Rishabh, Anusha, Nandhini and Gowtham.", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (itemId == R.id.notificationsItem) {
                 Log.d(TAG, "Notifications Selected");
@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.logoutItem) {
                 Log.d(TAG, "Logout Selected");
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(MainActivity.this, "Logout successful.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Logout successful.", Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
             } else {
@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.profileItem) {
                 Log.d(TAG, "Profile Selected");
+                Intent intent = new Intent(this, AccountActivity.class);
+                startActivity(intent);
                 return true;
             } else {
                 return true;
