@@ -12,7 +12,6 @@ import java.util.List;
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
     private List<Service> serviceList;
 
-    // Constructor to initialize the list of services
     public ServiceAdapter(List<Service> serviceList) {
         this.serviceList = serviceList;
     }
@@ -27,8 +26,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
         Service service = serviceList.get(position);
-
-        // Bind service data to the views
         holder.titleTextView.setText(service.getTitle());
         holder.descriptionTextView.setText(service.getDescription());
         holder.priceTextView.setText(String.valueOf(service.getPrice()));

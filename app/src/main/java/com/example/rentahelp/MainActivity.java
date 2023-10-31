@@ -31,9 +31,13 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.findItem) {
                 Log.d(TAG, "Find Selected");
+                Intent intent = new Intent(MainActivity.this, ServiceBrowsingActivity.class);
+                startActivity(intent);
                 return true;
             } else if (itemId == R.id.postItem) {
                 Log.d(TAG, "Post Selected");
+                Intent intent = new Intent(MainActivity.this, ServicePostingActivity.class);
+                startActivity(intent);
                 return true;
             } else if (itemId == R.id.aboutItem) {
                 Log.d(TAG, "About Selected");
@@ -75,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null) {
-            Toast.makeText(this, "Logged in as " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        if (getIntent().getBooleanExtra("bLoginActivityCheck", false)) {
+            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            if (currentUser != null) {
+                Toast.makeText(this, "Logged in as " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

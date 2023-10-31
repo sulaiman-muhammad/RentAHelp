@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="title_options">
-        <item>Jobs</item>
-        <item>Option 1</item>
-        <item>Option 2</item>
-        <item>Option 3</item>
-        <!-- Add more predefined options as needed -->
+        <item>House Cleaning</item>
+        <item>Car Wash</item>
+        <item>Tutoring</item>
+        <item>Cooking</item>
+        <item>Thermostat Repair</item>
+        <item>Lawn Mow</item>
+        <item>Babysitting</item>
     </array>
 </resources>
