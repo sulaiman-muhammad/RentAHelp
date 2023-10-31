@@ -15,11 +15,6 @@
         android:orderInCategory="2"
         app:showAsAction="always" />
     <item
-        android:id="@+id/postItem"
-        android:title="Post"
-        android:orderInCategory="2"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/aboutItem"
         android:title="About"
         android:orderInCategory="3"

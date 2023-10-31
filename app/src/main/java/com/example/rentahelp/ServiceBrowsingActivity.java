@@ -48,7 +48,7 @@ public class ServiceBrowsingActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ServiceBrowsingActivity.this, "YOOOOOO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceBrowsingActivity.this, "onCancelled", Toast.LENGTH_SHORT).show();
             }
         });
     }
