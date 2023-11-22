@@ -16,10 +16,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    static String TAG = RegisterActivity.class.getSimpleName();
+    private static final String TAG = RegisterActivity.class.getSimpleName();
 
     private FirebaseAuth firebaseAuth;
     private SharedPreferences sharedPreferences;
@@ -65,6 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.i(TAG, "Register successful.");
                             Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show();
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                            FirebaseUser user = task.getResult().getUser();
+                            if (user != null) {
+                                databaseReference.child(user.getUid()).child("email").setValue(user.getEmail());
+                            }
                             Intent intent = new Intent(this, LoginActivity.class);
                             startActivity(intent);
                             firebaseAuth.signOut();
@@ -84,10 +91,5 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
     }
 }

@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-
-    static String TAG = MainActivity.class.getSimpleName();
-    private FirebaseAuth firebaseAuth;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
         MaterialToolbar topToolbar = findViewById(R.id.topToolbar);
         BottomNavigationView bottomNavView = findViewById(R.id.bottomNavView);
-        firebaseAuth = FirebaseAuth.getInstance();
 
         topToolbar.setNavigationContentDescription("LeftAlign");
         topToolbar.setOnMenuItemClickListener(item -> {
@@ -36,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.postItem) {
                 Log.d(TAG, "Post Selected");
-                Intent intent = new Intent(this, ServicePostingActivity.class);
+                Intent intent = new Intent(this, PostServiceActivity.class);
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.aboutItem) {
                 Log.d(TAG, "About Selected");
-                Toast.makeText(this, "Version 1.0, by Sulaiman, Rishabh, Anusha, Nandhini and Gowtham.", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder aboutDialog = new AlertDialog.Builder(this);
+                aboutDialog.setTitle("Authors")
+                        .setMessage("Version 1.0, by Sulaiman, Rishabh, Anusha, Nandhini and Gowtham.")
+                        .setPositiveButton("OK", (aboutDialogInterface, id) -> {})
+                        .show();
                 return true;
             } else if (itemId == R.id.notificationsItem) {
                 Log.d(TAG, "Notifications Selected");
@@ -63,29 +64,15 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
-                return true;
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
-                return true;
             } else if (itemId == R.id.profileItem) {
                 Log.d(TAG, "Profile Selected");
                 Intent intent = new Intent(this, AccountActivity.class);
                 startActivity(intent);
-                return true;
-            } else {
-                return true;
             }
+            return true;
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (getIntent().getBooleanExtra("bLoginActivityCheck", false)) {
-            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-            if (currentUser != null) {
-                Toast.makeText(this, "Logged in as " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

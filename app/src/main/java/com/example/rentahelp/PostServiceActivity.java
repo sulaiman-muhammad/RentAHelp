@@ -11,13 +11,12 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ServicePostingActivity extends AppCompatActivity {
+public class PostServiceActivity extends AppCompatActivity {
 
-    static String TAG = ServicePostingActivity.class.getName();
+    private static final String TAG = PostServiceActivity.class.getName();
     private String title;
 
     @Override
@@ -34,8 +33,6 @@ public class ServicePostingActivity extends AppCompatActivity {
                 R.layout.custom_spinner_item,
                 R.id.customSpinnerItemText,
                 getResources().getTextArray(R.array.title_options));
-        FirebaseApp.initializeApp(this);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         titleSpinner.setAdapter(adapter);
         titleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

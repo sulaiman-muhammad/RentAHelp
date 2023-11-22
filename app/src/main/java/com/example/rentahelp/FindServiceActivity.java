@@ -26,11 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindServiceActivity extends AppCompatActivity {
-
-    static String TAG = FindServiceActivity.class.getSimpleName();
-
-    Spinner spinner;
-
+    private static final String TAG = FindServiceActivity.class.getSimpleName();
     private ServiceAdapter serviceAdapter;
     private List<Service> serviceList;
 
@@ -39,9 +35,9 @@ public class FindServiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_service);
 
-        spinner = findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         String[] options = {"House Cleaning", "Car Wash", "Tutoring", "Cooking", "Thermostat Repair", "Lawn Mow", "Babysitting"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.title_options));
         spinner.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

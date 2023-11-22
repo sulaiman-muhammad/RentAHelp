@@ -19,8 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-
-    static String TAG = LoginActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private FirebaseAuth firebaseAuth;
     private SharedPreferences sharedPreferences;
 
@@ -62,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
                             Log.i(TAG, "Login successful.");
                             Toast.makeText(this, "Login successful." , Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(this, MainActivity.class);
-                            intent.putExtra("bLoginActivityCheck", true);
                             startActivity(intent);
                             finish();
                         } else {
@@ -88,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("bLoginActivityCheck", true);
             startActivity(intent);
             finish();
         }

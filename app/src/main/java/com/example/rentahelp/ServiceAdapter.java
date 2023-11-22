@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder> {
-    private List<Service> serviceList;
+    private final List<Service> serviceList;
 
     public ServiceAdapter(List<Service> serviceList) {
         this.serviceList = serviceList;
@@ -36,8 +36,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         return serviceList.size();
     }
 
-    // Inner ViewHolder class to hold references to the item views
-    public class ServiceViewHolder extends RecyclerView.ViewHolder {
+    public static class ServiceViewHolder extends RecyclerView.ViewHolder {
         public TextView titleTextView;
         public TextView descriptionTextView;
         public TextView priceTextView;
