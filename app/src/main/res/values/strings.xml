@@ -11,4 +11,5 @@
     <string name="account_not_exists_text">Don\'t have an account?</string>
     <string name="login_now_text">Login Now</string>
     <string name="register_now_text">Register Now</string>
+    <string name="choose_title">Services</string>
 </resources>

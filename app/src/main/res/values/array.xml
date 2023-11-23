@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="title_options">
+        <item>House Cleaning</item>
+        <item>Car Wash</item>
+        <item>Tutoring</item>
+        <item>Cooking</item>
+        <item>Thermostat Repair</item>
+        <item>Lawn Mow</item>
+        <item>Babysitting</item>
+    </array>
+</resources>

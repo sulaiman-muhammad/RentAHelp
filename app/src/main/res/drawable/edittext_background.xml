@@ -1,0 +1,5 @@
+<!-- res/drawable/edittext_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#F2F2F2" /> <!-- Background color -->
+    <corners android:radius="8dp" /> <!-- Corner radius (adjust as needed) -->
+</shape>
