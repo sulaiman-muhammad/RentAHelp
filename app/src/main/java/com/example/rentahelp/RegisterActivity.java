@@ -19,6 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -32,6 +36,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         EditText emailEditText = findViewById(R.id.emailEditText);
+        EditText firstNameEditText = findViewById(R.id.firstNameEditText);
+        EditText lastNameEditText = findViewById(R.id.lastNameEditText);
         EditText passwordEditText = findViewById(R.id.passwordEditText);
         EditText confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -42,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener(view -> {
             String email = emailEditText.getText().toString();
+            String firstName = firstNameEditText.getText().toString();
+            String lastName = lastNameEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             String confirmPassword = confirmPasswordEditText.getText().toString();
 
@@ -67,13 +75,23 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.i(TAG, "Register successful.");
                             Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show();
+
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
                             FirebaseUser user = task.getResult().getUser();
                             if (user != null) {
-                                databaseReference.child(user.getUid()).child("email").setValue(user.getEmail());
+                                Map<String, Object> userMap = new HashMap<>();
+                                userMap.put("email", email);
+                                userMap.put("firstName", firstName);
+                                userMap.put("lastName", lastName);
+                                databaseReference.child(user.getUid()).updateChildren(userMap);
+                                firebaseFirestore.collection("User").document(user.getUid())
+                                        .set(userMap);
                             }
+
                             Intent intent = new Intent(this, LoginActivity.class);
                             startActivity(intent);
+
                             firebaseAuth.signOut();
                             finish();
                         } else {
