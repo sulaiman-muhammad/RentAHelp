@@ -43,17 +43,19 @@ public class PostServiceActivity extends AppCompatActivity {
         Spinner titleSpinner = findViewById(R.id.titleSpinner);
         EditText descriptionEditText = findViewById(R.id.descriptionEditText);
         EditText priceEditText = findViewById(R.id.priceEditText);
-        TextView availabilityTextView = findViewById(R.id.availabilityTextView);;
-        TextView startTimeTextView = findViewById(R.id.startTimeTextView);;
-        TextView endTimeTextView = findViewById(R.id.endTimeTextView);;
+        TextView availabilityTextView = findViewById(R.id.availabilityTextView);
+        TextView startTimeTextView = findViewById(R.id.startTimeTextView);
+        TextView endTimeTextView = findViewById(R.id.endTimeTextView);
+        Spinner addressSpinner = findViewById(R.id.addressSpinner);
+
         Button postButton = findViewById(R.id.postServiceButton);
 
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(
+        ArrayAdapter<CharSequence> titleAdapter = new ArrayAdapter<>(
                 this,
                 R.layout.custom_spinner_item,
                 R.id.customSpinnerItemText,
                 getResources().getTextArray(R.array.title_options));
-        titleSpinner.setAdapter(adapter);
+        titleSpinner.setAdapter(titleAdapter);
         titleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -62,6 +64,26 @@ public class PostServiceActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 //TODO: Handling when nothing is selected
+            }
+        });
+
+        ArrayAdapter<CharSequence> addressAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.title_options,
+                android.R.layout.simple_spinner_item
+        );
+        addressAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        addressSpinner.setAdapter(addressAdapter);
+        addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selectedAddress = parentView.getItemAtPosition(position).toString();
+                // Do something with the selectedAddress
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing
             }
         });
 

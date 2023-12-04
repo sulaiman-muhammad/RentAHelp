@@ -86,6 +86,34 @@
         android:clickable="true"
         android:focusable="true" />
 
+    <TextView
+        android:id="@+id/addressTextView"
+        style="@style/Price_Style"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:hint="Select Address"
+        app:layout_constraintEnd_toStartOf="@+id/addressSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/startTimeTextView" />
+
+    <Spinner
+        android:id="@+id/addressSpinner"
+        style="@style/Description_Style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/addressTextView"
+        app:layout_constraintTop_toBottomOf="@+id/startTimeTextView"
+        android:background="@drawable/custom_spinner_background"
+        android:popupBackground="#FFFFFF"
+        android:spinnerMode="dropdown" />
+
     <Button
         android:id="@+id/postServiceButton"
         android:layout_width="wrap_content"
@@ -93,7 +121,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/addressSpinner"
         android:text="Post Service" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
