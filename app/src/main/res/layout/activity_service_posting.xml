@@ -1,74 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
+    android:padding="16dp"
     tools:context=".PostServiceActivity">
 
     <Spinner
         android:id="@+id/titleSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
         android:background="@drawable/custom_spinner_background"
-        android:dropDownWidth="match_parent"
         android:entries="@array/title_options"
-        android:layoutDirection="ltr"
-        android:minHeight="48dp"
+        android:dropDownWidth="match_parent"
         android:popupBackground="#FFFFFF"
         android:prompt="@string/choose_title"
-        android:spinnerMode="dropdown" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDescription"
+        android:id="@+id/descriptionEditText"
         style="@style/Description_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Description" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleSpinner"
+        android:hint="Description"
+        android:inputType="textShortMessage" />
 
     <EditText
-        android:id="@+id/editTextPrice"
+        android:id="@+id/priceEditText"
         style="@style/Price_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText"
         android:inputType="numberDecimal"
         android:hint="Price" />
 
-    <Space
+    <TextView
+        android:id="@+id/availabilityTextView"
+        style="@style/Price_Style"
         android:layout_width="match_parent"
-        android:layout_height="16dp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceEditText"
+        android:hint="Availability" />
+
+    <TextView
+        android:id="@+id/startTimeTextView"
+        style="@style/Price_Style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/endTimeTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/availabilityTextView"
+        android:hint="Start Time"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/endTimeTextView"
+        style="@style/Price_Style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/startTimeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/availabilityTextView"
+        android:hint="End Time"
+        android:clickable="true"
+        android:focusable="true" />
 
     <Button
-        android:id="@+id/buttonPost1"
+        android:id="@+id/postServiceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTimeTextView"
         android:text="Post Service" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavView"
-        style="@style/Widget.MaterialComponents.BottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:menu="@menu/bottom_navigation_menu" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
