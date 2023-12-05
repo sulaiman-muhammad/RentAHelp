@@ -47,7 +47,6 @@ public class PostServiceActivity extends AppCompatActivity {
         TextView startTimeTextView = findViewById(R.id.startTimeTextView);
         TextView endTimeTextView = findViewById(R.id.endTimeTextView);
         Spinner addressSpinner = findViewById(R.id.addressSpinner);
-
         Button postButton = findViewById(R.id.postServiceButton);
 
         ArrayAdapter<CharSequence> titleAdapter = new ArrayAdapter<>(
@@ -150,11 +149,11 @@ public class PostServiceActivity extends AppCompatActivity {
                 return;
             }
 
-            Service service = new Service(selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, currentUser != null ? currentUser.getUid() : null, null, null);
-            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Services");
-            String serviceKey = databaseReference.push().getKey();
+            DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
+            String serviceKey = servicesReference.push().getKey();
+            Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
             if (serviceKey != null) {
-                databaseReference.child(serviceKey).setValue(service);
+                servicesReference.child(serviceKey).setValue(service);
             }
 
             Intent intent = new Intent(this, MainActivity.class);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rentahelp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -76,17 +77,14 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.i(TAG, "Register successful.");
                             Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show();
 
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+                            DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
                             FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-                            FirebaseUser user = task.getResult().getUser();
-                            if (user != null) {
-                                Map<String, Object> userMap = new HashMap<>();
-                                userMap.put("email", email);
-                                userMap.put("firstName", firstName);
-                                userMap.put("lastName", lastName);
-                                databaseReference.child(user.getUid()).updateChildren(userMap);
-                                firebaseFirestore.collection("User").document(user.getUid())
-                                        .set(userMap);
+                            FirebaseUser currentUser = task.getResult().getUser();
+                            if (currentUser != null) {
+                                User user = new User(currentUser.getUid(), firstName, lastName, null, email, null, 0.0);
+                                usersReference.child(currentUser.getUid()).setValue(user);
+                                firebaseFirestore.collection("Users").document(currentUser.getUid())
+                                        .set(user);
                             }
 
                             Intent intent = new Intent(this, LoginActivity.class);

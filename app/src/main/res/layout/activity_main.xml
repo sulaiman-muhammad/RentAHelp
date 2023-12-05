@@ -22,13 +22,65 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:layout_width="0dp"
+        android:id="@+id/topFrameLayoutHeading"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/app_name"
+        android:layout_margin="8dp"
         app:layout_constraintTop_toBottomOf="@id/topToolbarLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/topFrameLayout"
+        android:text="Posted"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:id="@+id/topFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toBottomOf="@id/topFrameLayoutHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/postedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/bottomFrameLayoutHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomFrameLayout"
+        android:text="Accepted"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:id="@+id/bottomFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        app:layout_constraintTop_toBottomOf="@id/bottomFrameLayoutHeading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavView">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/acceptedRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"
