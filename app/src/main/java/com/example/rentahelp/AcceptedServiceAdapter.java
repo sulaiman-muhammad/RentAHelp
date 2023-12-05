@@ -1,5 +1,7 @@
 package com.example.rentahelp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,11 @@ import com.example.rentahelp.model.Service;
 import java.util.List;
 
 public class AcceptedServiceAdapter extends RecyclerView.Adapter<AcceptedServiceAdapter.ViewHolder> {
+    private final Context context;
     private final List<Service> serviceList;
-    private int selectedPosition = RecyclerView.NO_POSITION;
 
-    public AcceptedServiceAdapter(List<Service> serviceList) {
+    public AcceptedServiceAdapter(Context context, List<Service> serviceList) {
+        this.context = context;
         this.serviceList = serviceList;
     }
 
@@ -34,17 +37,17 @@ public class AcceptedServiceAdapter extends RecyclerView.Adapter<AcceptedService
         holder.statusTextView.setText(service.getStatus().name());
         holder.priceTextView.setText(String.valueOf(service.getPrice()));
         holder.dateTextView.setText(service.getAvailability());
-        holder.itemView.setSelected(selectedPosition == position);
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, AcceptedServiceActivity.class);
+            intent.putExtra("Service", service);
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
         return serviceList.size();
-    }
-
-    public void setSelectedPosition(int position) {
-        selectedPosition = position;
-        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

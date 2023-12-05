@@ -15,6 +15,9 @@
         android:theme="@style/Theme.RentAHelp"
         tools:targetApi="31">
         <activity
+            android:name=".AcceptedServiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".PostedServiceActivity"
             android:exported="false" />
         <activity

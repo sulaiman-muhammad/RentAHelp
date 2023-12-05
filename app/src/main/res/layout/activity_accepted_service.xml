@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostedServiceActivity">
+    tools:context=".AcceptedServiceActivity">
 
     <TextView
         android:id="@+id/topFrameLayoutHeading"
@@ -98,6 +98,21 @@
 
                 </LinearLayout>
 
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:isIndicator="true" />
+
+                <TextView
+                    android:id="@+id/reviewTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="Review: N/A"
+                    android:textSize="16sp" />
+
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -109,36 +124,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <TextView
-        android:id="@+id/bottomFrameLayoutHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomFrameLayout"
-        android:text="Waiting for an agent to accept your request..."
-        android:textSize="18sp" />
-
-    <FrameLayout
-        android:id="@+id/bottomFrameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
-        app:layout_constraintTop_toBottomOf="@id/bottomFrameLayoutHeading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavView">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/userRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </FrameLayout>
+        app:layout_constraintGuide_percent="0.45" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavView"

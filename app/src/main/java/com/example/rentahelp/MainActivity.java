@@ -3,7 +3,6 @@ package com.example.rentahelp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,9 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rentahelp.model.Service;
-import com.example.rentahelp.model.Status;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         postedRecyclerView.setAdapter(postedServiceAdapter);
 
         List<Service> acceptedServiceList = new ArrayList<>();
-        AcceptedServiceAdapter acceptedServiceAdapter = new AcceptedServiceAdapter(acceptedServiceList);
+        AcceptedServiceAdapter acceptedServiceAdapter = new AcceptedServiceAdapter(this, acceptedServiceList);
         acceptedRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         acceptedRecyclerView.setAdapter(acceptedServiceAdapter);
 

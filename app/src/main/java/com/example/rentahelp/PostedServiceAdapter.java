@@ -64,5 +64,4 @@ public class PostedServiceAdapter extends RecyclerView.Adapter<PostedServiceAdap
             dateTextView = view.findViewById(R.id.dateTextView);
         }
     }
-
 }
