@@ -104,6 +104,12 @@ public class AccountActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button walletButton = findViewById(R.id.walletButton);
+        walletButton.setOnClickListener(view -> {
+            Intent intent = new Intent(AccountActivity.this, WalletActivity.class);
+            startActivity(intent);
+        });
+
         Button myAddressesButton = findViewById(R.id.myAddressesButton);
         myAddressesButton.setOnClickListener(v -> {
             Intent intent = new Intent(AccountActivity.this, Addresses.class);
