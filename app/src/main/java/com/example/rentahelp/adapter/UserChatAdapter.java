@@ -1,5 +1,6 @@
 package com.example.rentahelp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -33,10 +34,11 @@ public class UserChatAdapter extends RecyclerView.Adapter<UserChatAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final User user = mUsers.get(position);
-        holder.username.setText(user.getFirstName());
+        holder.username.setText(user.getFirstName() + " " + user.getLastName());
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, ChatActivity.class);
             intent.putExtra("userid", user.getUserId());

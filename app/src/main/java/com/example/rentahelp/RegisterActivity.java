@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser currentUser = task.getResult().getUser();
                             if (currentUser != null) {
                                 String userId = currentUser.getUid();
-                                User user = new User(userId, firstName, lastName, null, email, null, 0.0);
+                                User user = new User(userId, firstName, lastName, null, email, null, 0.0, 0.0, 0);
                                 usersReference.child(userId).setValue(user);
                                 String notificationKey = notificationsReference.push().getKey();
                                 Notification notification = new Notification(userId, "Account created.");

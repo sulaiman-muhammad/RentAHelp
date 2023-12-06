@@ -143,32 +143,34 @@ public class PostServiceActivity extends AppCompatActivity {
         });
 
         postButton.setOnClickListener(view -> {
-            String description = descriptionEditText.getText().toString();
-            double price = Double.parseDouble(priceEditText.getText().toString());
+            if (currentUser != null && currentUser.isEmailVerified()) {
+                String description = descriptionEditText.getText().toString();
+                double price = Double.parseDouble(priceEditText.getText().toString());
 
-            if (!isValidInput(selectedTitle, description, price, selectedDate, selectedStartTime, selectedEndTime)) {
-                return;
-            }
+                if (!isValidInput(selectedTitle, description, price, selectedDate, selectedStartTime, selectedEndTime)) {
+                    return;
+                }
 
-            DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
-            String serviceKey = servicesReference.push().getKey();
-            Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
-            if (serviceKey != null) {
-                servicesReference.child(serviceKey).setValue(service);
-            }
+                DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
+                String serviceKey = servicesReference.push().getKey();
+                Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
+                if (serviceKey != null) {
+                    servicesReference.child(serviceKey).setValue(service);
+                }
 
-            if (currentUser != null) {
                 DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
                 String notificationKey = notificationsReference.push().getKey();
                 Notification notification = new Notification(currentUser.getUid(), "Service request for " + selectedTitle + " added.");
                 if (notificationKey != null) {
                     notificationsReference.child(notificationKey).setValue(notification);
                 }
-            }
 
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Kindly verify your email.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

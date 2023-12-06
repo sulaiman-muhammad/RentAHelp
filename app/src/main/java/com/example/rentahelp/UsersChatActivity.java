@@ -66,12 +66,15 @@ public class UsersChatActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                username.setText(user.getFirstName());
-                String user_name = username.getText().toString();
-                Log.d(TAG, "username : " + firebaseUser.getUid());
+                if (user != null) {
+                    username.setText(user.getFirstName() + " " + user.getLastName());
+                    String user_name = username.getText().toString();
+                    Log.d(TAG, "username : " + firebaseUser.getUid());
+                }
             }
 
             @Override
