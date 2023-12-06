@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/dialogTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service Title"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dialogDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service Description" />
+
+        <TextView
+            android:id="@+id/dialogPriceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price" />
+
+        <TextView
+            android:id="@+id/dialogDateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selected Date" />
+
+        <TextView
+            android:id="@+id/dialogStartTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Time" />
+
+        <TextView
+            android:id="@+id/dialogEndTimeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Time" />
+
+        <TextView
+            android:id="@+id/dialogAddressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selected Address" />
+
+        <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Close" />
+
+    </LinearLayout>
+
+</RelativeLayout>

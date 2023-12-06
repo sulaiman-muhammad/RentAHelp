@@ -43,7 +43,9 @@ public class PostedServiceActivity extends AppCompatActivity {
             endTimeTextView.setText("End Time: " + service.getEndTime());
 
             if (service.getStatus() == Status.INITIATED) {
-                bottomFrameLayoutHeadingTextView.setText("Waiting for an agent to accept your request...");
+                if (service.getPotential() != null) {
+                    bottomFrameLayoutHeadingTextView.setText("Pick an agent...");
+                }
                 InitiatedFragment initiatedFragment = new InitiatedFragment(service);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.bottomFrameLayout, initiatedFragment)

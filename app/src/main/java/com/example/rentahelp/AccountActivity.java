@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
 
         TextView nameTextView = findViewById(R.id.nameTextView);
+        TextView ratingTextView = findViewById(R.id.ratingTextView);
 
         BottomNavigationView bottomNavView = findViewById(R.id.bottomNavView);
         bottomNavView.setOnNavigationItemSelectedListener(item -> {
@@ -85,6 +87,7 @@ public class AccountActivity extends AppCompatActivity {
                     User userData = snapshot.getValue(User.class);
                     if (userData != null) {
                         nameTextView.setText(userData.getFirstName() + " " + userData.getLastName());
+                        ratingTextView.setText("Average Rating: " + (userData.getRatingCount() != 0 ? userData.getRatingTotal() / userData.getRatingCount() : "N/A"));
                     }
                 }
 
@@ -103,8 +106,26 @@ public class AccountActivity extends AppCompatActivity {
 
         Button myAddressesButton = findViewById(R.id.myAddressesButton);
         myAddressesButton.setOnClickListener(v -> {
-            Intent intent2 = new Intent(AccountActivity.this, Addresses.class);
-            startActivity(intent2);
+            Intent intent = new Intent(AccountActivity.this, Addresses.class);
+            startActivity(intent);
+        });
+
+        Button signOutButton = findViewById(R.id.signOutButton);
+        signOutButton.setOnClickListener(v -> {
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                String notificationKey = notificationsReference.push().getKey();
+                Notification notification = new Notification(currentUser.getUid(), "Logout succesful.");
+                if (notificationKey != null) {
+                    notificationsReference.child(notificationKey).setValue(notification);
+                }
+            }
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Logout successful.", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 }

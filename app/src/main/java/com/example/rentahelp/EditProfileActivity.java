@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,14 +25,11 @@ import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class EditProfileActivity extends AppCompatActivity {
     private static final String TAG = EditProfileActivity.class.getSimpleName();
     private TextInputEditText firstNameEditText, lastNameEditText, phoneNumberEditText, emailEditText, dateOfBirthEditText;
     private Button buttonPickDate, btnSubmit;
-    public List<String> addresses;
-    private TextView textViewDateOfBirth;
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -85,8 +83,18 @@ public class EditProfileActivity extends AppCompatActivity {
                 databaseReference1.child(userId1).child("firstName").setValue(firstName);
                 databaseReference1.child(userId1).child("lastName").setValue(lastName);
                 databaseReference1.child(userId1).child("phoneNumber").setValue(phoneNumber);
-                databaseReference1.child(userId1).child("emailId").setValue(emailId);
-                databaseReference1.child(userId1).child("emailId").setValue(dob);
+                databaseReference1.child(userId1).child("email").setValue(emailId);
+                databaseReference1.child(userId1).child("dob").setValue(dob);
+
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                    String notificationKey = notificationsReference.push().getKey();
+                    Notification notification = new Notification(currentUser.getUid(), "Profile updated successfully.");
+                    if (notificationKey != null) {
+                        notificationsReference.child(notificationKey).setValue(notification);
+                    }
+                }
 
                 Toast.makeText(EditProfileActivity.this, "Data stored in Firebase", Toast.LENGTH_SHORT).show();
                 finish();

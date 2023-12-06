@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 if (currentUser != null) {
                     DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
                     String notificationKey = notificationsReference.push().getKey();
-                    Notification notification = new Notification(currentUser.getUid(), "Logout succesful");
+                    Notification notification = new Notification(currentUser.getUid(), "Logout succesful.");
                     if (notificationKey != null) {
                         notificationsReference.child(notificationKey).setValue(notification);
                     }

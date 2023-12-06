@@ -19,8 +19,8 @@ import com.example.rentahelp.model.User;
 import java.util.List;
 
 public class UserChatAdapter extends RecyclerView.Adapter<UserChatAdapter.ViewHolder> {
-    private Context mContext;
-    private List<User> mUsers;
+    private final Context mContext;
+    private final List<User> mUsers;
 
     public UserChatAdapter(Context mContext, List<User> mUsers) {
         this.mUsers = mUsers;

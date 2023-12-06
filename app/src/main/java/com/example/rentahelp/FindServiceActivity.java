@@ -38,20 +38,18 @@ public class FindServiceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find_service);
 
         Spinner spinner = findViewById(R.id.spinner);
-        String[] options = {"House Cleaning", "Car Wash", "Tutoring", "Cooking", "Thermostat Repair", "Lawn Mow", "Babysitting"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.title_options));
         spinner.setAdapter(arrayAdapter);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Handle the selected item here
-                String selectedOption = options[position];
+                String selectedTitle = getResources().getStringArray(R.array.title_options)[position];
+                filterRecyclerView(selectedTitle);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Handle when nothing is selected
             }
         });
 
@@ -60,7 +58,8 @@ public class FindServiceActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
-                return true;
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
                 Intent intent = new Intent(this, MainActivity.class);
@@ -70,16 +69,15 @@ public class FindServiceActivity extends AppCompatActivity {
                 Log.d(TAG, "Profile Selected");
                 Intent intent = new Intent(this, AccountActivity.class);
                 startActivity(intent);
-                return true;
-            } else {
-                return true;
             }
+            return true;
         });
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         serviceList = new ArrayList<>();
-        serviceAdapter = new ServiceAdapter(serviceList);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        serviceAdapter = new ServiceAdapter(this, serviceList);
         recyclerView.setAdapter(serviceAdapter);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Services");
@@ -97,8 +95,18 @@ public class FindServiceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(FindServiceActivity.this, "onCancelled", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Database Error");
             }
         });
+    }
+
+    private void filterRecyclerView(String selectedTitle) {
+        List<Service> filteredList = new ArrayList<>();
+        for (Service service : serviceList) {
+            if (service.getTitle().equals(selectedTitle)) {
+                filteredList.add(service);
+            }
+        }
+        serviceAdapter.updateList(filteredList);
     }
 }

@@ -51,7 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.dobTextView.setText("Date of Birth: " + user.getDob());
         holder.phoneTextView.setText("Phone: " + user.getPhoneNumber());
         holder.emailTextView.setText("Email: " + user.getEmail());
-        holder.ratingTextView.setText("Rating: 0");
+        holder.ratingTextView.setText("Average Rating: " + (user.getRatingCount() != 0 ? user.getRatingTotal() / user.getRatingCount() : "N/A"));
 
         holder.itemView.setOnClickListener(view -> {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);

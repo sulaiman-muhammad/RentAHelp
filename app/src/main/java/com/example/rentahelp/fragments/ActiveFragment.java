@@ -68,7 +68,7 @@ public class ActiveFragment extends Fragment {
                         dobTextView.setText("Date of Birth: " + user.getDob());
                         phoneTextView.setText("Phone: " + user.getPhoneNumber());
                         emailTextView.setText("Email: " + user.getEmail());
-                        ratingTextView.setText("Rating: 0");
+                        ratingTextView.setText("Average Rating: " + (user.getRatingCount() != 0 ? user.getRatingTotal() / user.getRatingCount() : "N/A"));
                     }
                 }
             }

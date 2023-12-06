@@ -63,7 +63,6 @@ public class PostServiceActivity extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                //TODO: Handling when nothing is selected
             }
         });
 
@@ -78,12 +77,10 @@ public class PostServiceActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selectedAddress = parentView.getItemAtPosition(position).toString();
-                // Do something with the selectedAddress
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // Do nothing
             }
         });
 
