@@ -20,10 +20,15 @@ import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class PostServiceActivity extends AppCompatActivity {
@@ -33,6 +38,8 @@ public class PostServiceActivity extends AppCompatActivity {
     private Calendar selectedDate;
     private Calendar selectedStartTime;
     private Calendar selectedEndTime;
+
+    private String selectedAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,23 +73,43 @@ public class PostServiceActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<CharSequence> addressAdapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.title_options,
-                android.R.layout.simple_spinner_item
-        );
-        addressAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        addressSpinner.setAdapter(addressAdapter);
-        addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String selectedAddress = parentView.getItemAtPosition(position).toString();
-            }
+        if (currentUser != null) {
+            DatabaseReference addressesReference = FirebaseDatabase.getInstance().getReference("Addresses");
+            addressesReference.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        List<String> addressList = new ArrayList<>();
+                        for (DataSnapshot addressSnapshot : dataSnapshot.getChildren()) {
+                            String address = addressSnapshot.getValue(String.class);
+                            addressList.add(address);
+                        }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
+                        ArrayAdapter<String> addressAdapter = new ArrayAdapter<>(
+                                PostServiceActivity.this,
+                                android.R.layout.simple_spinner_item,
+                                addressList
+                        );
+                        addressAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        addressSpinner.setAdapter(addressAdapter);
+                        addressSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                selectedAddress = parentView.getItemAtPosition(position).toString();
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parentView) {
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
 
         availabilityTextView.setOnClickListener(view -> {
             Calendar currentDate = Calendar.getInstance();
@@ -150,7 +177,7 @@ public class PostServiceActivity extends AppCompatActivity {
 
                 DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
                 String serviceKey = servicesReference.push().getKey();
-                Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
+                Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), selectedAddress, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
                 if (serviceKey != null) {
                     servicesReference.child(serviceKey).setValue(service);
                 }

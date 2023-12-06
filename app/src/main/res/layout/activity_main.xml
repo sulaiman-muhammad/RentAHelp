@@ -31,7 +31,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/topFrameLayout"
         android:text="Posted"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <FrameLayout
         android:id="@+id/topFrameLayout"
@@ -65,7 +66,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomFrameLayout"
         android:text="Accepted"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <FrameLayout
         android:id="@+id/bottomFrameLayout"
