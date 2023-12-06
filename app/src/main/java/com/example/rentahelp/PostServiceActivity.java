@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -154,6 +155,15 @@ public class PostServiceActivity extends AppCompatActivity {
             Service service = new Service(serviceKey, selectedTitle, description, price, getFormattedDate(selectedDate), getFormattedTime(selectedStartTime), getFormattedTime(selectedEndTime), null, 0.0, null, currentUser != null ? currentUser.getUid() : null, null, null);
             if (serviceKey != null) {
                 servicesReference.child(serviceKey).setValue(service);
+            }
+
+            if (currentUser != null) {
+                DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                String notificationKey = notificationsReference.push().getKey();
+                Notification notification = new Notification(currentUser.getUid(), "Service request for " + selectedTitle + " added.");
+                if (notificationKey != null) {
+                    notificationsReference.child(notificationKey).setValue(notification);
+                }
             }
 
             Intent intent = new Intent(this, MainActivity.class);

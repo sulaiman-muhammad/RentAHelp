@@ -12,9 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;
 import com.example.rentahelp.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -55,6 +58,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                         DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
                         servicesReference.child(service.getServiceId()).child("acceptedBy").setValue(user.getUserId());
                         servicesReference.child(service.getServiceId()).child("status").setValue(Status.ACTIVE.name());
+
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        if (currentUser != null) {
+                            DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                            String notificationKey = notificationsReference.push().getKey();
+                            Notification notification = new Notification(currentUser.getUid(), "You have picked " + user.getFirstName() + " " + user.getLastName() + " to be your agent for " + service.getTitle() + ".");
+                            if (notificationKey != null) {
+                                notificationsReference.child(notificationKey).setValue(notification);
+                            }
+                        }
 
                         Intent intent = new Intent(context, MainActivity.class);
                         context.startActivity(intent);

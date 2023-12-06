@@ -15,9 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;
 import com.example.rentahelp.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 public class ActiveFragment extends Fragment {
     private static final String TAG = ActiveFragment.class.getSimpleName();
     private final Service service;
-    private User postedByUser = null;
-    private User acceptedByUser = null;
+    private User postedByUser;
+    private User acceptedByUser;
 
     public ActiveFragment(Service service) {
         this.service = service;
@@ -86,12 +89,28 @@ public class ActiveFragment extends Fragment {
                             DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
                             servicesReference.child(service.getServiceId()).child("status").setValue(Status.COMPLETED.name());
 
+                            DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                            String notificationKey = notificationsReference.push().getKey();
+                            Notification notification = new Notification(postedByUser.getUserId(), "Your payment for " + service.getTitle() + " to " + acceptedByUser.getFirstName() + " " + acceptedByUser.getLastName() + " is succesful.");
+                            if (notificationKey != null) {
+                                notificationsReference.child(notificationKey).setValue(notification);
+                            }
+
                             Intent intent = new Intent(requireContext(), MainActivity.class);
                             requireContext().startActivity(intent);
                         })
                         .setNegativeButton("NO", (dialog, which) -> dialog.dismiss())
                         .show();
             } else {
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                    String notificationKey = notificationsReference.push().getKey();
+                    Notification notification = new Notification(currentUser.getUid(), "Payment for " + service.getTitle() + " failed. Insufficient credits.");
+                    if (notificationKey != null) {
+                        notificationsReference.child(notificationKey).setValue(notification);
+                    }
+                }
                 alertDialog.setTitle("Insufficient Credits")
                         .setMessage("You have insufficient credits to make this payment.")
                         .setPositiveButton("OK", (dialog, which) -> {

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
-import com.example.rentahelp.model.Status;
 import com.example.rentahelp.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 public class CompletedFragment extends Fragment {
     private static final String TAG = CompletedFragment.class.getSimpleName();
     private final Service service;
-    private User postedByUser = null;
-    private User acceptedByUser = null;
 
     public CompletedFragment(Service service) {
         this.service = service;
@@ -57,15 +56,9 @@ public class CompletedFragment extends Fragment {
             @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postedByUser = null;
-                acceptedByUser = null;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
-                    if (user != null && service.getPostedBy().equals(user.getUserId())) {
-                        postedByUser = user;
-                    }
                     if (user != null && service.getAcceptedBy().equals(user.getUserId())) {
-                        acceptedByUser = user;
                         nameTextView.setText("Name: " + user.getFirstName() + " " + user.getLastName());
                         dobTextView.setText("Date of Birth: " + user.getDob());
                         phoneTextView.setText("Phone: " + user.getPhoneNumber());
@@ -97,6 +90,16 @@ public class CompletedFragment extends Fragment {
                         DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
                         servicesReference.child(service.getServiceId()).child("rating").setValue(rating);
                         servicesReference.child(service.getServiceId()).child("review").setValue(review);
+
+                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                        if (currentUser != null) {
+                            DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                            String notificationKey = notificationsReference.push().getKey();
+                            Notification notification = new Notification(currentUser.getUid(), "Feedback posted for " + service.getTitle() + ".");
+                            if (notificationKey != null) {
+                                notificationsReference.child(notificationKey).setValue(notification);
+                            }
+                        }
 
                         Intent intent = new Intent(requireContext(), MainActivity.class);
                         requireContext().startActivity(intent);

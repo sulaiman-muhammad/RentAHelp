@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -62,10 +63,20 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 return true;
             } else if (itemId == R.id.notificationsItem) {
-                Log.d(TAG, "Notifications Selected");
+                Log.d(TAG, "Notification Selected");
+                Intent intent = new Intent(this, NotificationActivity.class);
+                startActivity(intent);
                 return true;
             } else if (itemId == R.id.logoutItem) {
                 Log.d(TAG, "Logout Selected");
+                if (currentUser != null) {
+                    DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                    String notificationKey = notificationsReference.push().getKey();
+                    Notification notification = new Notification(currentUser.getUid(), "Logout succesful");
+                    if (notificationKey != null) {
+                        notificationsReference.child(notificationKey).setValue(notification);
+                    }
+                }
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
