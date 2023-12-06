@@ -47,6 +47,8 @@ public class AcceptedServiceActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
                 Intent intent = new Intent(this, MainActivity.class);

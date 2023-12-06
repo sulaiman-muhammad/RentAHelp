@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.adapter.AcceptedServiceAdapter;
+import com.example.rentahelp.adapter.PostedServiceAdapter;
 import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -92,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
             } else if (itemId == R.id.profileItem) {

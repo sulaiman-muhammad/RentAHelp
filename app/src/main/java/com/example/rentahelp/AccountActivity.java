@@ -21,18 +21,18 @@ public class AccountActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
-                return true;
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                return true;
             } else if (itemId == R.id.profileItem) {
                 Log.d(TAG, "Profile Selected");
-                return true;
-            } else {
-                return true;
+                Intent intent = new Intent(this, AccountActivity.class);
+                startActivity(intent);
             }
+            return true;
         });
     }
 }

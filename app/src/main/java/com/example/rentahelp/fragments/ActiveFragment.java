@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.rentahelp.MainActivity;
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;

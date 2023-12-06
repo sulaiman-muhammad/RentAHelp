@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.R;
+import com.example.rentahelp.adapter.UserAdapter;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.User;
 import com.google.firebase.database.DataSnapshot;
