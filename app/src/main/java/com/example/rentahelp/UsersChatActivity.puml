@@ -1,0 +1,28 @@
+@startuml
+
+package com.example.rentahelp {
+    class UsersChatActivity {
+        - TAG: String
+        - profile_image: CircleImageView
+        - username: TextView
+        - firebaseUser: FirebaseUser
+        - reference: DatabaseReference
+        - backButton: ImageButton
+        + onCreate(savedInstanceState: Bundle): void
+    }
+
+    class UsersChatActivity$ViewPagerAdapter {
+        - fragments: ArrayList<Fragment>
+        - titles: ArrayList<String>
+        + ViewPagerAdapter(fm: FragmentManager)
+        + getItem(position: int): Fragment
+        + getCount(): int
+        + addFragment(fragment: Fragment, title: String): void
+        + getPageTitle(position: int): CharSequence
+    }
+}
+
+com.example.rentahelp.UsersChatActivity --|> androidx.appcompat.app.AppCompatActivity
+com.example.rentahelp.UsersChatActivity$ViewPagerAdapter --|> androidx.fragment.app.FragmentPagerAdapter
+
+@enduml

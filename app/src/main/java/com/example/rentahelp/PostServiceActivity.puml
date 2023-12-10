@@ -1,0 +1,20 @@
+@startuml
+
+package com.example.rentahelp {
+    class PostServiceActivity {
+        - TAG: String
+        - selectedTitle: String
+        - selectedDate: Calendar
+        - selectedStartTime: Calendar
+        - selectedEndTime: Calendar
+        - selectedAddress: String
+        + onCreate(savedInstanceState: Bundle): void
+        - getFormattedDate(calendar: Calendar): String
+        - getFormattedTime(calendar: Calendar): String
+        - isValidInput(selectedTitle: String, description: String, price: double, selectedDate: Calendar, selectedStartTime: Calendar, selectedEndTime: Calendar): boolean
+    }
+}
+
+com.example.rentahelp.PostServiceActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

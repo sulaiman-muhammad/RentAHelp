@@ -1,0 +1,15 @@
+@startuml
+
+package com.example.rentahelp.fragments {
+    class CompletedFragment {
+        - TAG: String
+        - service: Service
+        - acceptedByUser: User
+        + CompletedFragment(service: Service)
+        + onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+    }
+}
+
+com.example.rentahelp.fragments.CompletedFragment --|> androidx.fragment.app.Fragment
+
+@enduml

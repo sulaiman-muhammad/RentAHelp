@@ -1,0 +1,12 @@
+@startuml
+
+package com.example.rentahelp {
+    class NotificationActivity {
+        - TAG: String
+        + onCreate(savedInstanceState: Bundle): void
+    }
+}
+
+com.example.rentahelp.NotificationActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

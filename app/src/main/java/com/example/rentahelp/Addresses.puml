@@ -1,0 +1,33 @@
+@startuml
+
+package com.example.rentahelp {
+    class Addresses {
+        - TAG: String
+        - autoCompleteTextView: AutoCompleteTextView
+        - buttonSave: Button
+        - buttonAddAddress: Button
+        - listViewAddresses: ListView
+        - firebaseAuth: FirebaseAuth
+        - databaseReference: DatabaseReference
+        - addressesList: List<String>
+        - addressesAdapter: ArrayAdapter<String>
+        - AUTOCOMPLETE_REQUEST_CODE: int
+        + onCreate(savedInstanceState: Bundle): void
+        + loadAddressesFromFirebase(): void
+        + deleteAddress(position: int): void
+        + saveAddress(): void
+        + saveToFirebase(address: String): void
+        + startAutocompleteActivity(): void
+        + onActivityResult(requestCode: int, resultCode: int, data: Intent): void
+    }
+
+    class AddressesAdapter {
+        + AddressesAdapter(context: Context, addresses: List<String>)
+        + getView(position: int, convertView: View, parent: ViewGroup): View
+    }
+}
+
+com.example.rentahelp.Addresses --|> androidx.appcompat.app.AppCompatActivity
+com.example.rentahelp.AddressesAdapter --|> ArrayAdapter
+
+@enduml
