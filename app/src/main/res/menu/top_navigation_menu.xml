@@ -15,13 +15,14 @@
         android:orderInCategory="2"
         app:showAsAction="always" />
     <item
-        android:id="@+id/aboutItem"
-        android:title="About"
-        android:orderInCategory="3"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/notificationsItem"
         android:title="Notifications"
+        android:icon="@drawable/notification"
+        android:orderInCategory="3"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/aboutItem"
+        android:title="About"
         android:orderInCategory="4"
         app:showAsAction="never" />
     <item

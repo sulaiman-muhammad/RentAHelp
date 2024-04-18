@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rentahelp.model.Notification;
+import com.example.rentahelp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -76,17 +78,18 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.i(TAG, "Register successful.");
                             Toast.makeText(this, "Account created.", Toast.LENGTH_SHORT).show();
 
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-                            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-                            FirebaseUser user = task.getResult().getUser();
-                            if (user != null) {
-                                Map<String, Object> userMap = new HashMap<>();
-                                userMap.put("email", email);
-                                userMap.put("firstName", firstName);
-                                userMap.put("lastName", lastName);
-                                databaseReference.child(user.getUid()).updateChildren(userMap);
-                                firebaseFirestore.collection("User").document(user.getUid())
-                                        .set(userMap);
+                            DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
+                            DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
+                            FirebaseUser currentUser = task.getResult().getUser();
+                            if (currentUser != null) {
+                                String userId = currentUser.getUid();
+                                User user = new User(userId, firstName, lastName, null, email, null, 0.0);
+                                usersReference.child(userId).setValue(user);
+                                String notificationKey = notificationsReference.push().getKey();
+                                Notification notification = new Notification(userId, "Account created.");
+                                if (notificationKey != null) {
+                                    notificationsReference.child(notificationKey).setValue(notification);
+                                }
                             }
 
                             Intent intent = new Intent(this, LoginActivity.class);

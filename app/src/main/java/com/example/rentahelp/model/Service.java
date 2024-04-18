@@ -1,8 +1,10 @@
 package com.example.rentahelp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Service {
+public class Service implements Serializable {
+    private String serviceId;
     private String title;
     private String description;
     private double price;
@@ -11,12 +13,17 @@ public class Service {
     private String endTime;
     private String address;
     private double rating;
+    private String review;
     private String postedBy;
     private String acceptedBy;
     private List<String> potential;
     private Status status;
 
-    public Service(String title, String description, double price, String availability, String startTime, String endTime, String address, double rating, String postedBy, String acceptedBy, List<String> potential) {
+    public Service() {
+    }
+
+    public Service(String serviceId, String title, String description, double price, String availability, String startTime, String endTime, String address, double rating, String review, String postedBy, String acceptedBy, List<String> potential) {
+        this.serviceId = serviceId;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -25,10 +32,19 @@ public class Service {
         this.endTime = endTime;
         this.address = address;
         this.rating = rating;
+        this.review = review;
         this.postedBy = postedBy;
         this.acceptedBy = acceptedBy;
         this.potential = potential;
         this.status = Status.INITIATED;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public String getTitle() {
@@ -93,6 +109,14 @@ public class Service {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     public String getPostedBy() {
