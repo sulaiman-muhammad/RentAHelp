@@ -1,0 +1,17 @@
+@startuml
+
+package com.example.rentahelp.fragments {
+    class ActiveFragment {
+        - TAG: String
+        - service: Service
+        - postedByUser: User
+        - acceptedByUser: User
+        + ActiveFragment(service: Service)
+        + onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+        + onViewCreated(view: View, savedInstanceState: Bundle): void
+    }
+}
+
+com.example.rentahelp.fragments.ActiveFragment --|> androidx.fragment.app.Fragment
+
+@enduml

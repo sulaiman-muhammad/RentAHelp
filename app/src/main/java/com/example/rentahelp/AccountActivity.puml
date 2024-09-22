@@ -1,0 +1,12 @@
+@startuml
+
+package com.example.rentahelp {
+    class AccountActivity {
+        - TAG: String
+        + onCreate(savedInstanceState: Bundle): void
+    }
+}
+
+com.example.rentahelp.AccountActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

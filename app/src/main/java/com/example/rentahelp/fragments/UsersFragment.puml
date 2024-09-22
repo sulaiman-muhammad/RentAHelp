@@ -1,0 +1,16 @@
+@startuml
+
+package com.example.rentahelp.fragments {
+    class UsersFragment {
+        - TAG: String
+        - recyclerView: RecyclerView
+        - userChatAdapter: UserChatAdapter
+        - mUsers: List<User>
+        + onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+        + readUsers()
+    }
+}
+
+com.example.rentahelp.fragments.UsersFragment --|> androidx.fragment.app.Fragment
+
+@enduml

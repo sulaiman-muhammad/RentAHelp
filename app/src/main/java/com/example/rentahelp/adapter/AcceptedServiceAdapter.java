@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,15 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.AcceptedServiceActivity;
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Service;
 
 import java.util.List;
 
-public class PostedServiceAdapter extends RecyclerView.Adapter<PostedServiceAdapter.ViewHolder> {
+public class AcceptedServiceAdapter extends RecyclerView.Adapter<AcceptedServiceAdapter.ViewHolder> {
     private final Context context;
     private final List<Service> serviceList;
 
-    public PostedServiceAdapter(Context context, List<Service> serviceList) {
+    public AcceptedServiceAdapter(Context context, List<Service> serviceList) {
         this.context = context;
         this.serviceList = serviceList;
     }
@@ -31,7 +33,7 @@ public class PostedServiceAdapter extends RecyclerView.Adapter<PostedServiceAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostedServiceAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AcceptedServiceAdapter.ViewHolder holder, int position) {
         Service service = serviceList.get(position);
         holder.titleTextView.setText(service.getTitle());
         holder.statusTextView.setText(service.getStatus().name());
@@ -39,7 +41,7 @@ public class PostedServiceAdapter extends RecyclerView.Adapter<PostedServiceAdap
         holder.dateTextView.setText(service.getAvailability());
 
         holder.itemView.setOnClickListener(view -> {
-            Intent intent = new Intent(context, PostedServiceActivity.class);
+            Intent intent = new Intent(context, AcceptedServiceActivity.class);
             intent.putExtra("Service", service);
             context.startActivity(intent);
         });

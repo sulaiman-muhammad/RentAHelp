@@ -1,0 +1,15 @@
+@startuml
+
+package com.example.rentahelp {
+    class LoginActivity {
+        - TAG: String
+        - firebaseAuth: FirebaseAuth
+        - sharedPreferences: SharedPreferences
+        + onCreate(savedInstanceState: Bundle): void
+        + onStart(): void
+    }
+}
+
+com.example.rentahelp.LoginActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

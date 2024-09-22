@@ -1,18 +1,20 @@
 package com.example.rentahelp.model;
 
 public class User {
-    public String userId;
-    public String firstName;
-    public String lastName;
-    public String phoneNumber;
-    public String email;
-    public String dob;
-    public double credits;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String email;
+    private String dob;
+    private double credits;
+    private double ratingTotal;
+    private int ratingCount;
 
     public User() {
     }
 
-    public User(String userId, String firstName, String lastName, String phoneNumber, String email, String dob, double credits) {
+    public User(String userId, String firstName, String lastName, String phoneNumber, String email, String dob, double credits, double ratingTotal, int ratingCount) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +22,8 @@ public class User {
         this.email = email;
         this.dob = dob;
         this.credits = credits;
+        this.ratingTotal = ratingTotal;
+        this.ratingCount = ratingCount;
     }
 
     public String getUserId() {
@@ -76,5 +80,21 @@ public class User {
 
     public void setCredits(double credits) {
         this.credits = credits;
+    }
+
+    public double getRatingTotal() {
+        return ratingTotal;
+    }
+
+    public void setRatingTotal(double ratingTotal) {
+        this.ratingTotal = ratingTotal;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
     }
 }

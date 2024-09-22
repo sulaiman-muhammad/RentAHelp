@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/border_background"
     android:padding="8dp">
 
     <TextView
         android:id="@+id/titleTextView"
-        style="@style/Description_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Service Title"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp"/>
-
-    <TextView
-        android:id="@+id/descriptionTextView"
-        style="@style/Description_Style"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="Service Description" />
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/priceTextView"
-        style="@style/Price_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="Price: $0.00" />
 
 </LinearLayout>

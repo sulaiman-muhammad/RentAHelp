@@ -1,0 +1,19 @@
+@startuml
+
+package com.example.rentahelp.fragments {
+    class ChatFragment {
+        - TAG: String
+        - recyclerView: RecyclerView
+        - userChatAdapter: UserChatAdapter
+        - mUsers: List<User>
+        - fuser: FirebaseUser
+        - reference: DatabaseReference
+        - usersList: List<String>
+        + onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+        - readChats(): void
+    }
+}
+
+com.example.rentahelp.fragments.ChatFragment --|> androidx.fragment.app.Fragment
+
+@enduml

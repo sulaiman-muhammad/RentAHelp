@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.rentahelp.MainActivity;
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;
@@ -66,7 +68,7 @@ public class ActiveFragment extends Fragment {
                         dobTextView.setText("Date of Birth: " + user.getDob());
                         phoneTextView.setText("Phone: " + user.getPhoneNumber());
                         emailTextView.setText("Email: " + user.getEmail());
-                        ratingTextView.setText("Rating: 0");
+                        ratingTextView.setText("Average Rating: " + (user.getRatingCount() != 0 ? user.getRatingTotal() / user.getRatingCount() : "N/A"));
                     }
                 }
             }
@@ -90,10 +92,16 @@ public class ActiveFragment extends Fragment {
                             servicesReference.child(service.getServiceId()).child("status").setValue(Status.COMPLETED.name());
 
                             DatabaseReference notificationsReference = FirebaseDatabase.getInstance().getReference("Notifications");
-                            String notificationKey = notificationsReference.push().getKey();
-                            Notification notification = new Notification(postedByUser.getUserId(), "Your payment for " + service.getTitle() + " to " + acceptedByUser.getFirstName() + " " + acceptedByUser.getLastName() + " is succesful.");
-                            if (notificationKey != null) {
-                                notificationsReference.child(notificationKey).setValue(notification);
+                            String notificationKey1 = notificationsReference.push().getKey();
+                            Notification notification1 = new Notification(postedByUser.getUserId(), "Your payment of " + service.getPrice() + " for " + service.getTitle() + " to " + acceptedByUser.getFirstName() + " " + acceptedByUser.getLastName() + " is succesful.");
+                            if (notificationKey1 != null) {
+                                notificationsReference.child(notificationKey1).setValue(notification1);
+                            }
+
+                            String notificationKey2 = notificationsReference.push().getKey();
+                            Notification notification2 = new Notification(acceptedByUser.getUserId(), "You have received a payment of " + service.getPrice() + " for " + service.getTitle() + " by " + postedByUser.getFirstName() + " " + postedByUser.getLastName() + " successfully.");
+                            if (notificationKey2 != null) {
+                                notificationsReference.child(notificationKey2).setValue(notification2);
                             }
 
                             Intent intent = new Intent(requireContext(), MainActivity.class);

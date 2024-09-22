@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.rentahelp.adapter.NotificationAdapter;
 import com.example.rentahelp.model.Notification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +37,7 @@ public class NotificationActivity extends AppCompatActivity {
         RecyclerView notificationRecyclerView = findViewById(R.id.notificationRecyclerView);
 
         List<Notification> notificationList = new ArrayList<>();
-        NotificationAdapter notificationAdapter = new NotificationAdapter(this, notificationList);
+        NotificationAdapter notificationAdapter = new NotificationAdapter(notificationList);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         notificationRecyclerView.setAdapter(notificationAdapter);
 
@@ -65,6 +66,8 @@ public class NotificationActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
                 Intent intent = new Intent(this, MainActivity.class);

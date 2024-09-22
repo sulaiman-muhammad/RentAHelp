@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.rentahelp.MainActivity;
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.User;
@@ -33,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 public class CompletedFragment extends Fragment {
     private static final String TAG = CompletedFragment.class.getSimpleName();
     private final Service service;
+    private User acceptedByUser;
 
     public CompletedFragment(Service service) {
         this.service = service;
@@ -56,14 +59,16 @@ public class CompletedFragment extends Fragment {
             @SuppressLint({"NotifyDataSetChanged", "SetTextI18n"})
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                acceptedByUser = null;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     User user = postSnapshot.getValue(User.class);
                     if (user != null && service.getAcceptedBy().equals(user.getUserId())) {
+                        acceptedByUser = user;
                         nameTextView.setText("Name: " + user.getFirstName() + " " + user.getLastName());
                         dobTextView.setText("Date of Birth: " + user.getDob());
                         phoneTextView.setText("Phone: " + user.getPhoneNumber());
                         emailTextView.setText("Email: " + user.getEmail());
-                        ratingTextView.setText("Rating: 0");
+                        ratingTextView.setText("Average Rating: " + (user.getRatingCount() != 0 ? user.getRatingTotal() / user.getRatingCount() : "N/A"));
                     }
                 }
             }
@@ -90,6 +95,9 @@ public class CompletedFragment extends Fragment {
                         DatabaseReference servicesReference = FirebaseDatabase.getInstance().getReference("Services");
                         servicesReference.child(service.getServiceId()).child("rating").setValue(rating);
                         servicesReference.child(service.getServiceId()).child("review").setValue(review);
+
+                        usersReference.child(acceptedByUser.getUserId()).child("ratingTotal").setValue(acceptedByUser.getRatingTotal() + rating);
+                        usersReference.child(acceptedByUser.getUserId()).child("ratingCount").setValue(acceptedByUser.getRatingCount() + 1);
 
                         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                         if (currentUser != null) {

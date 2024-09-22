@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rentahelp.fragments.ActiveFragment;
+import com.example.rentahelp.fragments.CompletedFragment;
+import com.example.rentahelp.fragments.InitiatedFragment;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,7 +43,9 @@ public class PostedServiceActivity extends AppCompatActivity {
             endTimeTextView.setText("End Time: " + service.getEndTime());
 
             if (service.getStatus() == Status.INITIATED) {
-                bottomFrameLayoutHeadingTextView.setText("Waiting for an agent to accept your request...");
+                if (service.getPotential() != null) {
+                    bottomFrameLayoutHeadingTextView.setText("Pick an agent...");
+                }
                 InitiatedFragment initiatedFragment = new InitiatedFragment(service);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.bottomFrameLayout, initiatedFragment)
@@ -64,6 +69,8 @@ public class PostedServiceActivity extends AppCompatActivity {
             int itemId = item.getItemId();
             if (itemId == R.id.chatItem) {
                 Log.d(TAG, "Chat Selected");
+                Intent intent = new Intent(this, UsersChatActivity.class);
+                startActivity(intent);
             } else if (itemId == R.id.homeItem) {
                 Log.d(TAG, "Home Selected");
                 Intent intent = new Intent(this, MainActivity.class);

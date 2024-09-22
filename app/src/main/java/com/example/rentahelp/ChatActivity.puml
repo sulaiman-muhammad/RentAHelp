@@ -1,0 +1,25 @@
+@startuml
+
+package com.example.rentahelp {
+    class ChatActivity {
+        - TAG: String
+        - profile_image: CircleImageView
+        - username: TextView
+        - fuser: FirebaseUser
+        - reference: DatabaseReference
+        - messageAdapter: MessageAdapter
+        - mchat: List<Chat>
+        - recyclerView: RecyclerView
+        - intent: Intent
+        - userid: String
+        - btn_send: ImageButton
+        - text_send: EditText
+        + onCreate(savedInstanceState: Bundle): void
+        + sendMessage(sender: String, receiver: String, message: String): void
+        + readMesages(myid: String, userid: String): void
+    }
+}
+
+com.example.rentahelp.ChatActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

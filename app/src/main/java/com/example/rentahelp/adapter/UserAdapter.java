@@ -1,4 +1,4 @@
-package com.example.rentahelp;
+package com.example.rentahelp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.MainActivity;
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Notification;
 import com.example.rentahelp.model.Service;
 import com.example.rentahelp.model.Status;
@@ -49,7 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.dobTextView.setText("Date of Birth: " + user.getDob());
         holder.phoneTextView.setText("Phone: " + user.getPhoneNumber());
         holder.emailTextView.setText("Email: " + user.getEmail());
-        holder.ratingTextView.setText("Rating: 0");
+        holder.ratingTextView.setText("Average Rating: " + (user.getRatingCount() != 0 ? user.getRatingTotal() / user.getRatingCount() : "N/A"));
 
         holder.itemView.setOnClickListener(view -> {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);

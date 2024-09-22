@@ -1,0 +1,15 @@
+@startuml
+
+package com.example.rentahelp {
+    class FindServiceActivity {
+        - TAG: String
+        - serviceAdapter: ServiceAdapter
+        - serviceList: List<Service>
+        + onCreate(savedInstanceState: Bundle): void
+        + filterRecyclerView(selectedTitle: String): void
+    }
+}
+
+com.example.rentahelp.FindServiceActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml

@@ -1,6 +1,5 @@
-package com.example.rentahelp;
+package com.example.rentahelp.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rentahelp.R;
 import com.example.rentahelp.model.Notification;
 
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
-    private final Context context;
     private final List<Notification> notificationList;
 
-    public NotificationAdapter(Context context, List<Notification> notificationList) {
-        this.context = context;
+    public NotificationAdapter(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
 

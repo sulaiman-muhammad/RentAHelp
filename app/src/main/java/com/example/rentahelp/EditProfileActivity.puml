@@ -1,0 +1,24 @@
+@startuml
+
+package com.example.rentahelp {
+    class EditProfileActivity {
+        - TAG: String
+        - firstNameEditText: TextInputEditText
+        - lastNameEditText: TextInputEditText
+        - phoneNumberEditText: TextInputEditText
+        - emailEditText: TextInputEditText
+        - dateOfBirthEditText: TextInputEditText
+        - buttonPickDate: Button
+        - btnSubmit: Button
+        - firebaseAuth: FirebaseAuth
+        + onCreate(savedInstanceState: Bundle): void
+        + showDatePickerDialog(): void
+        + areAllFieldsFilled(): boolean
+        + isValidPhoneNumber(phoneNumber: String): boolean
+        + isValidDateOfBirth(dob: String): boolean
+    }
+}
+
+com.example.rentahelp.EditProfileActivity --|> androidx.appcompat.app.AppCompatActivity
+
+@enduml
